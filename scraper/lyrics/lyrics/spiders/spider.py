@@ -71,10 +71,10 @@ class SinhalaLyricsSpider(SitemapSpider):
             yield {
                 'en_title': en_title,
                 'sn_title': sn_title,
-                'genre': genre,
-                'singer': singer,
-                'writer': writer,
-                'music_artist': music,
+                'en_genre': genre,
+                'en_singer': singer,
+                'en_writer': writer,
+                'en_music_artist': music,
                 'key': key,
                 'lyrics': song,
                 'views': int((views.split('- ')[1].split('V')[0]).
