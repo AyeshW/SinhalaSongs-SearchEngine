@@ -1,4 +1,26 @@
 from scrapy.spiders import SitemapSpider
+import re
+
+
+def is_english(s):
+    return re.search('[a-zA-Z]', s)
+
+
+def process_song(song_lines):
+    song = ""
+
+    for section in song_lines:
+        lines = section.splitlines()
+        for line in lines:
+            line_striped = (re.sub(' +', ' ', line)).strip()
+
+            if (is_english(line_striped) or ("|" in line_striped)):
+                pass
+            else:
+                if len(line_striped) > 0:
+                    song += line_striped + " "
+
+    return song
 
 
 class SinhalaLyricsSpider(SitemapSpider):
@@ -27,11 +49,12 @@ class SinhalaLyricsSpider(SitemapSpider):
         music = response.xpath('//*[@class="music"]/a/text()').get()
         views = response.xpath('//*[@class="tptn_counter"]/text()').get()
 
-        song = ''
+        #song = ''
         if song_lines and song_lines != [] and en_title and genre and singer and writer and music and views:
             en_title = en_title.split(' | ')[0]
             if not sn_title:
-                sn_title = en_title
+                sn_title = en_title.split('–')[1]
+            en_title = en_title.split('–')[0]
 
             key = ""
             if guitar:
@@ -41,8 +64,9 @@ class SinhalaLyricsSpider(SitemapSpider):
                 else:
                     key = keys[0]
 
-            for line in song_lines:
-                song = song + " " + line.replace("\n", " ").replace("\t", " ")
+            song = process_song(song_lines)
+            # for line in song_lines:
+            #     song = song + " " + line.replace("\n", " ").replace("\t", " ")
 
             yield {
                 'en_title': en_title,
