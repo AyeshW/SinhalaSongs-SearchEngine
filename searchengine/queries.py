@@ -52,19 +52,6 @@ aggregations = {
 }
 
 
-def exact_match_query(phrase, field):
-    query = {
-        "query": {
-            "match_phrase": {
-                field: phrase
-            }
-        }
-    }
-
-    query = json.dumps(query)
-    return query
-
-
 def faceted_multi_match_query(phrase, fields):
     # queries are with weighted boosted fields
     query = {
@@ -73,11 +60,11 @@ def faceted_multi_match_query(phrase, fields):
             "multi_match": {
                 "query": phrase,
                 "fields": fields,
-                "operator": 'or'
+                "operator": 'or',
+                "fuzziness": "AUTO"
             }
         },
         "aggs": aggregations
-
     }
 
     query = json.dumps(query)
@@ -85,6 +72,7 @@ def faceted_multi_match_query(phrase, fields):
 
 
 def faceted_multi_match_range(phrase, results_count, fields):
+    print("inside range: ",phrase)
     query = {
         "size": results_count,
         "sort": [
@@ -99,7 +87,7 @@ def faceted_multi_match_range(phrase, results_count, fields):
         },
         "aggs": aggregations
     }
-
+    print(query)
     query = json.dumps(query)
     return query
 
