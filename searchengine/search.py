@@ -89,30 +89,39 @@ def search(phrase, index):
             result_count = int(float(word))
 
         if word in genre_keywords:
+            print("Boosting for sn_genre")
             boosting_dict["sn_genre"] = 6
 
         elif word in singer_keywords:
+            print("Boosting for sn_singer")
             boosting_dict["sn_singer"] = 4
 
         if word in en_genre_keywords:
+            print("Boosting for en_genre")
             boosting_dict["en_genre"] = 6
 
         elif word in en_singer_keywords:
+            print("Boosting for en_singer")
             boosting_dict["en_singer"] = 4
 
         if word in writer_keywords:
+            print("Boosting for sn_singer")
             boosting_dict["sn_singer"] = 4
 
         elif word in en_writer_keywords:
+            print("Boosting for en_writer")
             boosting_dict["en_writer"] = 4
 
         if word in music_keywords:
+            print("Boosting for sn_genre")
             boosting_dict["sn_music_artist"] = 5
 
         elif word in en_music_keywords:
+            print("Boosting for en_music_artist")
             boosting_dict["en_music_artist"] = 5
 
         if word in guitar_keywords:
+            print("Boosting for key")
             boosting_dict["key"] = 7
 
         if word in rating_keywords or word in en_rating_keywords:
@@ -128,6 +137,7 @@ def search(phrase, index):
     else:
         query = faceted_multi_match_range(phrase, result_count, boosted_fields)
 
+    print("Query: ", query)
     client = Elasticsearch("localhost:9200")
     respond = client.search(index=index, body=query)
 

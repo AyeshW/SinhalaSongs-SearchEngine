@@ -2,7 +2,7 @@ from flask import Flask, request
 from searchengine.search import search
 app = Flask(__name__)
 
-INDEX = "test2music"
+INDEX = "sinhala-songs"
 
 
 @app.route('/sinhala-songs/search')

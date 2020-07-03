@@ -3,7 +3,7 @@ from elasticsearch import Elasticsearch, helpers
 
 
 def create_index(source_path):
-    with open('../corpus/sinhala_songs_corpus.json') as fp:
+    with open(source_path) as fp:
         docs = json.load(fp)
 
     print("Dict docs length:", len(docs))
@@ -13,7 +13,7 @@ def create_index(source_path):
     resp = helpers.bulk(
         client,
         docs,
-        index="test2music"
+        index="sinhala-songs"
     )
 
 
