@@ -55,7 +55,9 @@ The corpus consists of 12 fields.
 - Install the requirements.txt using `pip install requirements.txt`
 - Start an Elastic Search instance on your PC
 - Move into the searchengine directory and run `python3 -m index.py` for indexing the corpus in Elastic Search
-- For setting up a flask server at [http://127.0.0.1:5000/](http://127.0.0.1:5000/) 
-    Run `export FLASK_APP=app`
-        `flask run'
+- For setting up a flask server at [http://127.0.0.1:5000/](http://127.0.0.1:5000/) run below commands 
+    ```
+        export FLASK_APP=app
+        flask run
+    ```
 Now you can send POST requests to *http://127.0.0.1:5000/sinhala-songs/search/q=YOUR-SEARCH-STRING* using Postman tool or CLI.
