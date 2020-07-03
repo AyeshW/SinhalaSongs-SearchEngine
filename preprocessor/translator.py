@@ -32,10 +32,5 @@ def translate():
 
     df.to_json('sinhala_songs_corpus.json', orient='records')
 
-    output = df.to_json(orient='records')[1:-1].replace('},{', '} {')
-
-    with open('corpus_elastic_format.txt', 'w') as f:
-        f.write(output)
-
 if __name__ == '__main__':
     translate()
