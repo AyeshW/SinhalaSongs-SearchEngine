@@ -46,5 +46,5 @@ sniffio==1.1.0
 Twisted==26.4.0rc2
 urllib3==1.26.19
 w3lib==1.22.0
-Werkzeug==3.0.3
+Werkzeug==3.1.6
 zope.interface==5.1.0
